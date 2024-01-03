@@ -2,11 +2,11 @@
 
 This Zambretti algorithm is a C library that predicts weather conditions based on pressure trends and altitude. 
 
-It utilizes Zambretti's algorithm to determine weather forecasts using pressure trends and calculates weather conditions like "Settled Fine," "Rain at Frequent Intervals," and more.
+It utilizes Zambretti's algorithm to determine weather forecast using pressure trends and calculates weather conditions like "Settled Fine," "Rain at Frequent Intervals," and more.
 
 ## Usage
 
-**WARNING: make sure to set the altitude of your location in the header file "zambretti.h" modifying the "ALTITUDE_M" constant.**
+**WARNING: make sure to set the altitude to your location in the header file "zambretti.h" modifying the "ALTITUDE_M" constant.**
 
 - `make`: Compile all files.
 - `make run`: Run the example program.
