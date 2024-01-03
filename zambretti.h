@@ -2,6 +2,8 @@
 #include <string.h>
 #include <math.h>
 
+#define ALTITUDE_M 558 /* Set your location altitude (in meters) before run */
+
 enum pressure_trend
 {
     FALLING,

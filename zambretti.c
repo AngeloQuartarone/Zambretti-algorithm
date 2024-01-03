@@ -10,8 +10,6 @@
 #include <math.h>
 #include "zambretti.h"
 
-#define ALTITUDE_M 558 /* Set your location altitude (in meters) before run */
-
 /**
  * Calculates the pressure trend over a fixed period.
  * The trend can be rising, falling or steady.
