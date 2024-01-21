@@ -2,8 +2,6 @@
 #include <string.h>
 #include <math.h>
 
-#define ALTITUDE_M 558 /* Set your location altitude (in meters) before run */
-
 enum pressure_trend
 {
     FALLING,
@@ -11,7 +9,9 @@ enum pressure_trend
     RISING
 };
 
+#define ALTITUDE_M 12 // 8 + 4
+
 char *lookUpTable(int z);
 float pressureSeaLevel(float t, float p);
-int pressureTrend(int n, int o);
+int pressureTrend(int new, int old);
 int caseCalculation(int c, float p);

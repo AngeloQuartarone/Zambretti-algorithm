@@ -13,18 +13,18 @@
 /**
  * Calculates the pressure trend over a fixed period.
  * The trend can be rising, falling or steady.
- * @param n newest pressure data
- * @param o oldest pressure data
+ * @param new newest pressure data
+ * @param old oldest pressure data
  */
-int pressureTrend(int n, int o)
+int pressureTrend(int new, int old)
 {
     int act_press_trnd = -1;
 
-    if (n - o < -160)
+    if (new - old < -160)
     {
         act_press_trnd = FALLING;
     }
-    else if (n - o > 160)
+    else if (new - old > 160)
     {
         act_press_trnd = RISING;
     }
@@ -57,19 +57,23 @@ float pressureSeaLevel(float t, float p)
  */
 int caseCalculation(int c, float p)
 {
+    float x = 0;
     switch (c)
     {
     case FALLING:
-        return 127 - (0.12 * p);
+        x = 127 - (0.12 * p);
         break;
     case STEADY:
-        return 144 - (0.13 * p);
+        x = 144 - (0.13 * p);
         break;
     case RISING:
-        return 185 - (0.16 * p);
+        x = 185 - (0.16 * p);
+        break;
     default:
         return -1;
     }
+
+    return (int)roundf(x);
 }
 
 /**
