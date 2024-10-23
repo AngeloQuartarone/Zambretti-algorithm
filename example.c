@@ -3,17 +3,21 @@
 
 int main()
 {
-    int newest_pressure = 1000;
-    int oldest_pressure = 980;
+    float newest_pressure = 1026.580039;
+    float oldest_pressure = 1026.410034;
 
-    float temperature = 25.0;
-    float current_pressure = 950.0;
+    float temperature = 18.0;
+    float humidity = 80.0;
+    //float current_pressure = 1012.890015;
 
     int current_trend = pressureTrend(newest_pressure, oldest_pressure);
 
-    float pressure_at_sea_level = pressureSeaLevel(temperature, current_pressure);
+    float pressure_at_sea_level = pressureSeaLevel(temperature, newest_pressure);
 
-    int calculation_result = caseCalculation(current_trend, pressure_at_sea_level);
+    //int calculation_result = caseCalculation(current_trend, pressure_at_sea_level);
+    int calculation_result = caseCalculationWithSeason(current_trend, pressure_at_sea_level, humidity, 10);
+
+    printf("Pressure trend: %d\n", calculation_result);
 
     char *weather_forecast = lookUpTable(calculation_result);
 

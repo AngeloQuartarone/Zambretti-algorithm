@@ -6,7 +6,7 @@ OUT = zambretti_example
 all: $(OUT)
 
 $(OUT): $(SRC)
-	$(CC) $(CFLAGS) -o $(OUT) $(SRC)
+	$(CC) $(CFLAGS) -o $(OUT) $(SRC) -lm
 
 run: $(OUT)
 	./$(OUT)

@@ -16,15 +16,17 @@
  * @param new newest pressure data
  * @param old oldest pressure data
  */
-int pressureTrend(int new, int old)
+int pressureTrend(float new, float old)
 {
+    printf("new: %f\n", new);
+    printf("old: %f\n", old);
     int act_press_trnd = -1;
 
-    if (new - old < -160)
+    if (new - old < -1.60)
     {
         act_press_trnd = FALLING;
     }
-    else if (new - old > 160)
+    else if (new - old > 1.60)
     {
         act_press_trnd = RISING;
     }
@@ -76,6 +78,76 @@ int caseCalculation(int c, float p)
     return (int)roundf(x);
 }
 
+int determineSeason(int month)
+{
+    if (month >= 4 && month <= 9)  
+    {
+        return SUMMER;
+    }
+    else 
+    {
+        return WINTER;
+    }
+}
+
+int adjustForSeason(int forecast, int season)
+{
+    if (season == WINTER){
+        forecast += 2;  
+        if (forecast > 32)  
+            forecast = 32;
+    }
+    else if (season == SUMMER)  
+    {
+        forecast -= 2;  
+        if (forecast < 1) 
+            forecast = 1;
+    }
+
+    return forecast;
+}
+
+
+
+int adjustForHumidity(int forecast, float humidity)
+{
+    if (humidity > 70.0)  
+    {
+        forecast += 2;
+        if (forecast > 32)  
+            forecast = 32;
+    }
+    else if (humidity < 50.0)  
+    {
+        forecast -= 2;  
+        if (forecast < 1)  
+            forecast = 1;
+    }
+
+    return forecast;
+}
+
+
+int caseCalculationWithHumidity(int trend, float pressure, float humidity)
+{
+    int forecast = caseCalculation(trend, pressure);
+    forecast = adjustForHumidity(forecast, humidity);
+    return forecast;
+}
+
+int caseCalculationWithSeason(int trend, float pressure, float humidity, int month)
+{
+    int forecast = caseCalculation(trend, pressure);  
+    forecast = adjustForHumidity(forecast, humidity);  
+
+    int season = determineSeason(month);  
+    forecast = adjustForSeason(forecast, season);  
+
+    return forecast;
+}
+
+
+
 /**
  * Return the string that describes weather forecast.
  * @param z result of "caseCalculation" function.
@@ -103,7 +175,7 @@ char *lookUpTable(int z)
         return "Unsettled, Rain Later";
         break;
     case 7:
-        return "	Rain at Times, Worse Later";
+        return "Rain at Times, Worse Later";
         break;
     case 8:
         return "Rain at Times, Becoming Very Unsettled";
